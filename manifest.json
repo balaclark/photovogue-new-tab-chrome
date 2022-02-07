@@ -1,0 +1,19 @@
+{
+  "name": "PhotoVogue - Pic of the Day New Tab",
+  "description": "View today’s pic of the day on you new tab page.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "chrome_url_overrides": { "newtab": "newTab.html" },
+  "action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

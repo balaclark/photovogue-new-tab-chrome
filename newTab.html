@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PhotoVogue Pic of the Day</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css"> -->
+
+    <script async src="script.js"></script>
+
+    <style>
+        #top {
+            text-align: center;
+        }
+
+        #logo {
+            background-color: white;
+            display: inline-block;
+        }
+
+        #day {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div id="logo">
+            <img width="200px" src="logo.png" alt="PhotoVogue" />
+        </div>
+        <h2 class="subtitle is-4 " id="day"></h2>
+    </div>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-half">
+                    <img id="main-image" src="" alt="photo of the day" />
+                </div>
+                <div class="column">
+                    <h1 class="title is-2 is-spaced" id="title"></h1>
+                    <h3 class="subtitle is-5">By <a href="#" id="photographerName"></a></h1>
+                        <div class="content is-medium">
+                            <p id="photographerBiography"></p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
