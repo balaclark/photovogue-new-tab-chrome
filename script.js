@@ -21,14 +21,24 @@
     return data.items[0];
   };
 
-  const render = ({ title, photographer, gallery_image, themes }) => {
+  const render = ({ id, title, photographer, gallery_image, themes }) => {
     document.getElementById("day").textContent = formatDate(today);
     document.getElementById("title").textContent = title;
+
+    document.getElementById(
+      "main-image-link"
+    ).href = `https://www.vogue.com/photovogue/photos/pic-of-the-day/gallery#${id}`;
+
+    document.getElementById("photographerLink").onclick = () =>
+      (window.location = `https://www.vogue.com/photovogue/photographers/${photographer.id}`);
+
     const photograherName = document.getElementById("photographerName");
     photograherName.textContent = photographer.name;
     photograherName.href = `https://www.vogue.com/photovogue/photographers/${photographer.id}`;
+
     const biography = document.getElementById("photographerBiography");
     biography.textContent = photographer.biography;
+
     if (photographer.websites.length) {
       const websiteList = document.createElement("ul");
       biography.appendChild(websiteList);
@@ -41,9 +51,11 @@
         websiteList.appendChild(li);
       });
     }
+
     document.getElementById("photographerCity").textContent = photographer.city;
     document.getElementById("main-image").src = gallery_image;
     document.getElementById("avatar").src = photographer.avatar;
+
     themes.forEach((theme) => {
       const el = document.createElement("strong");
       el.textContent = `#${theme.text} `;

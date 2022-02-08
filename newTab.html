@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PhotoVogue Pic of the Day</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
-    <!-- <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css"> -->
     <script async src="script.js"></script>
 
     <style>
@@ -14,18 +13,30 @@
             background-color: black;
         }
 
-        body>.title {
+        header.section {
             color: white;
             text-align: center;
+            padding: 1rem !important;
+            padding-bottom: 0 !important;
+        }
+
+        header.section .title {
+            color: white;
         }
 
         .container {
-            background-color: white;
+            background-color: white
         }
 
         .navbar {
             background-color: black;
             display: block;
+            border-bottom: 1px solid rgb(31, 31, 31);
+        }
+
+        .navbar,
+        .navbar-brand {
+            height: 105px;
         }
 
         .navbar-item {
@@ -46,19 +57,25 @@
             list-style: none;
             margin: 0;
         }
+
+        #photographerLink {
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="https://www.vogue.com/verso/static/vogue/assets/logo-photovogue.70a4703cab16dc25cff47ca7cd663554d3561d7d.svg"
-                    alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
+            <a class="navbar-item" href="https://www.vogue.com/photovogue">
+                <img src="logo-white.svg" alt="PhotoVogue Logo" width="168" height="72">
             </a>
         </div>
     </nav>
-    <h1 id="day" class="title is-4"></h1>
+    <header class="section">
+        <h1 class="title is-3">Pic of the Day</h1>
+        <h2 id="day" class="title is-5"></h2>
+    </header>
     <section class="section">
         <div class="container">
             <div class="card">
@@ -75,12 +92,14 @@
                     </button>
                 </header>
                 <div class="card-image">
-                    <figure class="image">
-                        <img id="main-image" src="" alt="PhotoVogue Pic of the Day">
-                    </figure>
+                    <a id="main-image-link" href="#">
+                        <figure class="image">
+                            <img id="main-image" src="" alt="PhotoVogue Pic of the Day">
+                        </figure>
+                    </a>
                 </div>
                 <div class="card-content">
-                    <div class="media">
+                    <div id="photographerLink" class="media">
                         <div class="media-left">
                             <figure class="image is-48x48">
                                 <img id="avatar" src="" alt="Avatar Image">
@@ -91,7 +110,6 @@
                             <p class="subtitle is-6" id="photographerCity"></p>
                         </div>
                     </div>
-
                     <div class="content">
                         <span id="photographerBiography"></span>
                         <span id="themes"></span>
