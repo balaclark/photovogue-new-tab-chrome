@@ -18,27 +18,44 @@
     const res = await fetch(url);
     const data = await res.json();
 
-    console.log(data);
-
     return data.items[0];
   };
 
-  const render = ({ title, photographer, gallery_image }) => {
+  const render = ({ title, photographer, gallery_image, themes }) => {
     document.getElementById("day").textContent = formatDate(today);
     document.getElementById("title").textContent = title;
     const photograherName = document.getElementById("photographerName");
     photograherName.textContent = photographer.name;
     photograherName.href = `https://www.vogue.com/photovogue/photographers/${photographer.id}`;
-    document.getElementById("photographerBiography").textContent =
-      photographer.biography;
+    const biography = document.getElementById("photographerBiography");
+    biography.textContent = photographer.biography;
+    if (photographer.websites.length) {
+      const websiteList = document.createElement("ul");
+      biography.appendChild(websiteList);
+      photographer.websites.forEach((website) => {
+        const link = document.createElement("a");
+        link.href = website;
+        link.textContent = website;
+        const li = document.createElement("li");
+        li.appendChild(link);
+        websiteList.appendChild(li);
+      });
+    }
+    document.getElementById("photographerCity").textContent = photographer.city;
     document.getElementById("main-image").src = gallery_image;
+    document.getElementById("avatar").src = photographer.avatar;
+    themes.forEach((theme) => {
+      const el = document.createElement("strong");
+      el.textContent = `#${theme.text} `;
+      document.getElementById("themes").appendChild(el);
+    });
   };
 
   console.log("fetching data…");
 
   const data = await fetchData();
 
-  console.log("result:", data);
+  console.log(data);
 
   render(data);
 })();

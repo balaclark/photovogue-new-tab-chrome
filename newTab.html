@@ -7,44 +7,95 @@
     <title>PhotoVogue Pic of the Day</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <!-- <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css"> -->
-
     <script async src="script.js"></script>
 
     <style>
-        #top {
+        body {
+            background-color: black;
+        }
+
+        body>.title {
+            color: white;
             text-align: center;
         }
 
-        #logo {
+        .container {
             background-color: white;
-            display: inline-block;
         }
 
-        #day {
-            text-align: center
+        .navbar {
+            background-color: black;
+            display: block;
+        }
+
+        .navbar-item {
+            min-height: 5rem;
+        }
+
+        .navbar-brand {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-item img {
+            max-height: none;
+        }
+
+        #photographerBiography ul {
+            padding-bottom: 1ex;
+            list-style: none;
+            margin: 0;
         }
     </style>
 </head>
 
 <body>
-    <div id="top">
-        <div id="logo">
-            <img width="200px" src="logo.png" alt="PhotoVogue" />
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://www.vogue.com/verso/static/vogue/assets/logo-photovogue.70a4703cab16dc25cff47ca7cd663554d3561d7d.svg"
+                    alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
+            </a>
         </div>
-        <h2 class="subtitle is-4 " id="day"></h2>
-    </div>
+    </nav>
+    <h1 id="day" class="title is-4"></h1>
     <section class="section">
         <div class="container">
-            <div class="columns">
-                <div class="column is-one-half">
-                    <img id="main-image" src="" alt="photo of the day" />
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        <!-- <span id="day"></span> -->
+                        <!-- &nbsp; -->
+                        <span id="title"></span>
+                    </p>
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </header>
+                <div class="card-image">
+                    <figure class="image">
+                        <img id="main-image" src="" alt="PhotoVogue Pic of the Day">
+                    </figure>
                 </div>
-                <div class="column">
-                    <h1 class="title is-2 is-spaced" id="title"></h1>
-                    <h3 class="subtitle is-5">By <a href="#" id="photographerName"></a></h1>
-                        <div class="content is-medium">
-                            <p id="photographerBiography"></p>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img id="avatar" src="" alt="Avatar Image">
+                            </figure>
                         </div>
+                        <div class="media-content">
+                            <p class="title is-4" id="photographerName"></p>
+                            <p class="subtitle is-6" id="photographerCity"></p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <span id="photographerBiography"></span>
+                        <span id="themes"></span>
+                    </div>
                 </div>
             </div>
         </div>
