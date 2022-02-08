@@ -1,4 +1,6 @@
 (async () => {
+  const days = 3;
+
   const formatDate = (date) => {
     const options = {
       month: "long",
@@ -7,12 +9,9 @@
     return date.toLocaleDateString("en-US", options);
   };
 
-  const days = 4;
   const today = new Date();
   const past = new Date();
   past.setDate(today.getDate() - days);
-
-  console.log("date range:", { past, today });
 
   const fetchData = async () => {
     const [todayIsoDate] = today.toISOString().split("T");
@@ -22,14 +21,13 @@
     const res = await fetch(url);
     const data = await res.json();
 
-    console.log(data.items);
-
     return data.items;
   };
 
   const render = (
     parentEl,
-    { id, title, photographer, gallery_image, themes, daily_date }
+    { id, title, photographer, themes, daily_date, ...data },
+    { imageKey = "gallery_image" } = {}
   ) => {
     parentEl.querySelector(".day").textContent = formatDate(
       new Date(daily_date)
@@ -64,7 +62,7 @@
     }
 
     parentEl.querySelector(".photographerCity").textContent = photographer.city;
-    parentEl.querySelector(".main-image").src = gallery_image;
+    parentEl.querySelector(".main-image").src = data[imageKey];
     parentEl.querySelector(".avatar").src = photographer.avatar;
 
     themes.forEach((theme) => {
@@ -74,23 +72,21 @@
     });
   };
 
-  console.log("fetching data…");
-
   const [todaysPic, ...prevPics] = await fetchData();
 
   render(document.getElementById("today"), todaysPic);
 
   const prevPicEl = document.querySelector(".prev-day");
+  const more = document.querySelector(".more");
 
   prevPics.forEach((data, index) => {
-    // TODO more link at end
     if (!index) {
-      render(prevPicEl, data);
+      render(prevPicEl, data, { imageKey: "thumbnail_image" });
       return;
     }
     const el = prevPicEl.cloneNode(true);
-    render(el, data);
-    prevPicEl.parentNode.appendChild(el);
+    render(el, data, { imageKey: "thumbnail_image" });
+    prevPicEl.parentNode.insertBefore(el, more);
   });
 
   // TODO hide loader, show content
