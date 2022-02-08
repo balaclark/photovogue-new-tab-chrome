@@ -1,42 +1,53 @@
 (async () => {
   const formatDate = (date) => {
     const options = {
-      weekday: "long",
-      year: "numeric",
       month: "long",
       day: "numeric",
     };
     return date.toLocaleDateString("en-US", options);
   };
 
+  const days = 4;
   const today = new Date();
+  const past = new Date();
+  past.setDate(today.getDate() - days);
+
+  console.log("date range:", { past, today });
 
   const fetchData = async () => {
-    const [isoDate] = today.toISOString().split("T");
-    const url = `https://api.vogue.com/production/photos?count=1&date_from=${isoDate}&date_to=${isoDate}&feature=true&locale=en-us&type_ids=3`;
+    const [todayIsoDate] = today.toISOString().split("T");
+    const [pastIsoDate] = past.toISOString().split("T");
+    const url = `https://api.vogue.com/production/photos?count=${days}&date_from=${pastIsoDate}&date_to=${todayIsoDate}&feature=true&locale=en-us&type_ids=3`;
 
     const res = await fetch(url);
     const data = await res.json();
 
-    return data.items[0];
+    console.log(data.items);
+
+    return data.items;
   };
 
-  const render = ({ id, title, photographer, gallery_image, themes }) => {
-    document.getElementById("day").textContent = formatDate(today);
-    document.getElementById("title").textContent = title;
+  const render = (
+    parentEl,
+    { id, title, photographer, gallery_image, themes, daily_date }
+  ) => {
+    parentEl.querySelector(".day").textContent = formatDate(
+      new Date(daily_date)
+    );
+    parentEl.querySelector(".photo-title").textContent = title;
 
-    document.getElementById(
-      "main-image-link"
+    parentEl.querySelector(
+      ".main-image-link"
     ).href = `https://www.vogue.com/photovogue/photos/pic-of-the-day/gallery#${id}`;
 
-    document.getElementById("photographerLink").onclick = () =>
+    parentEl.querySelector(".photographerLink").onclick = () =>
       (window.location = `https://www.vogue.com/photovogue/photographers/${photographer.id}`);
 
-    const photograherName = document.getElementById("photographerName");
+    const photograherName = parentEl.querySelector(".photographerName");
     photograherName.textContent = photographer.name;
     photograherName.href = `https://www.vogue.com/photovogue/photographers/${photographer.id}`;
 
-    const biography = document.getElementById("photographerBiography");
+    const biography = parentEl.querySelector(".photographerBiography");
     biography.textContent = photographer.biography;
 
     if (photographer.websites.length) {
@@ -52,22 +63,35 @@
       });
     }
 
-    document.getElementById("photographerCity").textContent = photographer.city;
-    document.getElementById("main-image").src = gallery_image;
-    document.getElementById("avatar").src = photographer.avatar;
+    parentEl.querySelector(".photographerCity").textContent = photographer.city;
+    parentEl.querySelector(".main-image").src = gallery_image;
+    parentEl.querySelector(".avatar").src = photographer.avatar;
 
     themes.forEach((theme) => {
       const el = document.createElement("strong");
       el.textContent = `#${theme.text} `;
-      document.getElementById("themes").appendChild(el);
+      parentEl.querySelector(".themes").appendChild(el);
     });
   };
 
   console.log("fetching data…");
 
-  const data = await fetchData();
+  const [todaysPic, ...prevPics] = await fetchData();
 
-  console.log(data);
+  render(document.getElementById("today"), todaysPic);
 
-  render(data);
+  const prevPicEl = document.querySelector(".prev-day");
+
+  prevPics.forEach((data, index) => {
+    // TODO more link at end
+    if (!index) {
+      render(prevPicEl, data);
+      return;
+    }
+    const el = prevPicEl.cloneNode(true);
+    render(el, data);
+    prevPicEl.parentNode.appendChild(el);
+  });
+
+  // TODO hide loader, show content
 })();

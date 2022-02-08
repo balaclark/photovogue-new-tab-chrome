@@ -77,14 +77,22 @@
             max-height: none;
         }
 
-        #photographerBiography ul {
+        .photographerBiography ul {
             padding-bottom: 1ex;
             list-style: none;
             margin: 0;
         }
 
-        #photographerLink {
+        .photographerLink {
             cursor: pointer;
+        }
+
+        .column {
+            background-color: black;
+        }
+
+        .is-one-quarter .card {
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -97,50 +105,87 @@
             </a>
         </div>
     </nav>
-    <header class="section">
+    <!-- <header class="section">
         <h1 class="title is-3">Pic of the Day</h1>
         <h2 id="day" class="title is-5"></h2>
-    </header>
+    </header> -->
     <section class="section">
         <div class="container">
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">
-                        <!-- <span id="day"></span> -->
-                        <!-- &nbsp; -->
-                        <span id="title"></span>
-                    </p>
-                    <button class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </header>
-                <div class="card-image">
-                    <a id="main-image-link" href="#">
-                        <figure class="image">
-                            <img id="main-image" src="" alt="PhotoVogue Pic of the Day">
-                        </figure>
-                    </a>
-                </div>
-                <div class="card-content">
-                    <div id="photographerLink" class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <img id="avatar" src="" alt="Avatar Image">
-                            </figure>
+            <div class="columns">
+                <div class="column is-three-quarters">
+                    <div id="today" class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                <span class="day"></span>
+                                &nbsp;
+                                —
+                                &nbsp;
+                                “<span class="photo-title"></span>”
+                            </p>
+                        </header>
+                        <div class="card-image">
+                            <a class="main-image-link" href="#">
+                                <figure class="image">
+                                    <img class="main-image" src="" alt="PhotoVogue Pic of the Day">
+                                </figure>
+                            </a>
                         </div>
-                        <div class="media-content">
-                            <p class="title is-4" id="photographerName"></p>
-                            <p class="subtitle is-6" id="photographerCity"></p>
+                        <div class="card-content">
+                            <div class="photographerLink media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img class="avatar" src="" alt="Avatar Image">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4 photographerName"></p>
+                                    <p class="subtitle is-6 photographerCity"></p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <span class="photographerBiography"></span>
+                                <span class="themes"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <span id="photographerBiography"></span>
-                        <span id="themes"></span>
+                </div>
+
+                <div class="column is-one-quarter">
+                    <div class="card prev-day">
+                        <a class="main-image-link">
+                            <div class="card-header">
+                                <p class="card-header-title">
+                                    <span class="day"></span>
+                                </p>
+                            </div>
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img class="main-image" alt="">
+                                </figure>
+                            </div>
+                            <div class="card-header">
+                                <p class="card-header-title">
+                                    “<span class="photo-title"></span>”
+                                </p>
+                            </div>
+                            <div style="display:none">
+                                <figure class="image is-48x48 photographerLink">
+                                    <img class="avatar" src="https://bulma.io/images/placeholders/96x96.png" alt="">
+                                </figure>
+                                <ul>
+                                    <li class="photographerCity"></li>
+                                    <li class="photographerBiography"></li>
+                                    <li class="title is-4 photographerName"></li>
+                                    <li class="themes"></li>
+                                </ul>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        </div>
         </div>
     </section>
 </body>
