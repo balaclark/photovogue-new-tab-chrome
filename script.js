@@ -67,7 +67,7 @@
 
     themes.forEach((theme) => {
       const el = document.createElement("strong");
-      el.textContent = `#${theme.text} `;
+      el.textContent = `#${theme.text.toLowerCase()} `;
       parentEl.querySelector(".themes").appendChild(el);
     });
   };
