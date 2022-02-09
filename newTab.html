@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>New Tab</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
-    <!-- <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
 
     <script async src="script.js"></script>
 
@@ -46,7 +46,8 @@
 
         body,
         .column,
-        .columns {
+        .columns,
+        .section {
             background-color: black;
         }
 
@@ -114,6 +115,10 @@
         .is-hidden {
             display: none !important;
         }
+
+        .section.search {
+            padding-bottom: 0;
+        }
     </style>
 </head>
 
@@ -121,24 +126,25 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://www.vogue.com/photovogue">
-                <img src="logo-white.svg" alt="PhotoVogue Logo" width="168" height="72">
+                <img src="logo-white.svg" alt="§PhotoVogue Logo" width="168" height="72">
             </a>
         </div>
     </nav>
-    <section class="section">
-        <div class="container">
-            <!-- <div class="field"> -->
-            <!--     <div class="control has-icons-left has-icons-right"> -->
-            <!--         <input class="input is-large" type="search" placeholder="Search Google"> -->
-            <!--         <span class="icon is-medium is-left"> -->
-            <!--             <i class="fas fa-search"></i> -->
-            <!--         </span> -->
-            <!--         <span class="icon is-medium is-right"> -->
-            <!--             <i class="fas fa-check"></i> -->
-            <!--         </span> -->
-            <!--     </div> -->
-            <!-- </div> -->
-            <div class="is-hidden" data-theme="compact">
+    <div class="container">
+        <div class="is-hidden" data-theme="compact">
+            <section class="section search">
+                <form method="get" action="https://www.google.com/search">
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input is-large" type="search" name="q" placeholder="Search Google" autofocus>
+                            <span class="icon is-medium is-left">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <section class="section">
                 <div class="columns">
                     <div class="column">
                         <div class="card">
@@ -189,97 +195,114 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+        </div>
 
-            <div class="columns is-hidden" data-theme="large">
-                <div class="column is-three-quarters">
-                    <div id="today" class="card">
-                        <a class="main-image-link">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    <span class="day"></span>
-                                    &nbsp;
-                                    —
-                                    &nbsp;
-                                    “<span class="photo-title"></span>”
-                                </p>
-                            </header>
-                            <div class="card-image">
-                                <figure class="image">
-                                    <img class="main-image" src="" alt="PhotoVogue Pic of the Day">
-                                </figure>
-                            </div>
-                        </a>
-                        <div class="card-content">
-                            <div class="photographerLink media">
-                                <div class="media-left">
-                                    <figure class="image is-48x48">
-                                        <img class="avatar" src="" alt="Avatar Image">
+
+        <div class="is-hidden" data-theme="large">
+            <section class="section search">
+                <form method="get" action="https://www.google.com/search">
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input is-large" type="search" name="q" placeholder="Search Google" autofocus>
+                            <span class="icon is-medium is-left">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <section class="section">
+                <div class="columns">
+                    <div class="column is-three-quarters">
+                        <div id="today" class="card">
+                            <a class="main-image-link">
+                                <header class="card-header">
+                                    <p class="card-header-title">
+                                        <span class="day"></span>
+                                        &nbsp;
+                                        —
+                                        &nbsp;
+                                        “<span class="photo-title"></span>”
+                                    </p>
+                                </header>
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="main-image" src="" alt="PhotoVogue Pic of the Day">
                                     </figure>
                                 </div>
-                                <div class="media-content">
-                                    <p class="title is-4 photographerName"></p>
-                                    <p class="subtitle is-6 photographerCity"></p>
+                            </a>
+                            <div class="card-content">
+                                <div class="photographerLink media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48">
+                                            <img class="avatar" src="" alt="Avatar Image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-4 photographerName"></p>
+                                        <p class="subtitle is-6 photographerCity"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content">
-                                <span class="photographerBiography"></span>
-                                <span class="themes"></span>
+                                <div class="content">
+                                    <span class="photographerBiography"></span>
+                                    <span class="themes"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="column is-one-quarter">
-                    <div class="card prev-day">
-                        <a class="main-image-link">
-                            <div class="card-header">
-                                <p class="card-header-title">
-                                    <span class="day"></span>
-                                </p>
-                            </div>
-                            <div class="card-image">
-                                <figure class="image">
-                                    <img class="main-image" alt="">
-                                </figure>
-                            </div>
-                            <div style="display:none">
+                    <div class="column is-one-quarter">
+                        <div class="card prev-day">
+                            <a class="main-image-link">
                                 <div class="card-header">
                                     <p class="card-header-title">
-                                        “<span class="photo-title"></span>”
+                                        <span class="day"></span>
                                     </p>
                                 </div>
-                                <figure class="image is-48x48 photographerLink">
-                                    <img class="avatar" src="https://bulma.io/images/placeholders/96x96.png" alt="">
-                                </figure>
-                                <ul>
-                                    <li class="photographerCity"></li>
-                                    <li class="photographerBiography"></li>
-                                    <li class="title is-4 photographerName"></li>
-                                    <li class="themes"></li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="main-image" alt="">
+                                    </figure>
+                                </div>
+                                <div style="display:none">
+                                    <div class="card-header">
+                                        <p class="card-header-title">
+                                            “<span class="photo-title"></span>”
+                                        </p>
+                                    </div>
+                                    <figure class="image is-48x48 photographerLink">
+                                        <img class="avatar" src="https://bulma.io/images/placeholders/96x96.png" alt="">
+                                    </figure>
+                                    <ul>
+                                        <li class="photographerCity"></li>
+                                        <li class="photographerBiography"></li>
+                                        <li class="title is-4 photographerName"></li>
+                                        <li class="themes"></li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
 
-                    <div class="card more">
-                        <a href="https://www.vogue.com/photovogue/photos/pic-of-the-day">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    More…
-                                </p>
-                            </header>
-                            <div class="card-image">
-                                <figure class="image is-4by3">
-                                    <img src="logo-black.svg" alt="PhotoVogue Logo">
-                                </figure>
-                            </div>
-                        </a>
+                        <div class="card more">
+                            <a href="https://www.vogue.com/photovogue/photos/pic-of-the-day">
+                                <header class="card-header">
+                                    <p class="card-header-title">
+                                        More…
+                                    </p>
+                                </header>
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="logo-black.svg" alt="PhotoVogue Logo">
+                                    </figure>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
+    </div>
 </body>
 
 </html>
