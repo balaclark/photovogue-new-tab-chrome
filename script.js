@@ -1,5 +1,5 @@
 (async () => {
-  const days = 3;
+  const days = 4;
 
   const options = await chrome.storage.sync.get();
 
@@ -80,8 +80,11 @@
     const [todaysPic, ...prevPics] = data;
     renderPhoto(document.getElementById("today"), todaysPic);
 
-    const prevPicEl = document.querySelector(".prev-day");
-    const more = document.querySelector(".more");
+    const parent = document.querySelector(
+      '[data-theme="large"] .is-one-quarter'
+    );
+    const prevPicEl = parent.querySelector(".prev-day");
+    const more = parent.querySelector(".more");
 
     prevPics.forEach((data, index) => {
       if (!index) {
@@ -90,12 +93,24 @@
       }
       const el = prevPicEl.cloneNode(true);
       renderPhoto(el, data, { imageKey: "thumbnail_image" });
-      prevPicEl.parentNode.insertBefore(el, more);
+      parent.insertBefore(el, more);
     });
   };
 
   const renderCompact = () => {
-    console.log("render compact");
+    const parent = document.querySelector('[data-theme="compact"] .columns');
+    const first = parent.querySelector(".column:first-child");
+    const more = parent.querySelector(".more");
+
+    data.forEach((pic, index) => {
+      if (!index) {
+        renderPhoto(first, pic, { imageKey: "thumbnail_image" });
+        return;
+      }
+      const next = first.cloneNode(true);
+      renderPhoto(next, pic, { imageKey: "thumbnail_image" });
+      parent.insertBefore(next, more);
+    });
   };
 
   const render = {
