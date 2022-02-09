@@ -4,6 +4,8 @@
   "version": "1.0",
   "manifest_version": 3,
   "chrome_url_overrides": { "newtab": "newTab.html" },
+  "permissions": ["storage"],
+  "options_page": "options.html",
   "action": {
     "default_icon": {
       "16": "icon16.png",

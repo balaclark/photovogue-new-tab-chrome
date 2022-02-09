@@ -104,6 +104,10 @@
         .more .card-image {
             padding: 1.5rem;
         }
+
+        .is-hidden {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -128,7 +132,11 @@
             <!--         </span> -->
             <!--     </div> -->
             <!-- </div> -->
-            <div class="columns">
+            <div class="columns is-hidden" data-theme="compact">
+                compact
+            </div>
+
+            <div class="columns is-hidden" data-theme="large">
                 <div class="column is-three-quarters">
                     <div id="today" class="card">
                         <a class="main-image-link">
@@ -215,6 +223,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </body>

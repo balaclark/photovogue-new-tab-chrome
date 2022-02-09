@@ -1,6 +1,8 @@
 (async () => {
   const days = 3;
 
+  const options = await chrome.storage.sync.get();
+
   const formatDate = (date) => {
     const options = {
       month: "long",
@@ -24,7 +26,7 @@
     return data.items;
   };
 
-  const render = (
+  const renderPhoto = (
     parentEl,
     { id, title, photographer, themes, daily_date, ...data },
     { imageKey = "gallery_image" } = {}
@@ -72,22 +74,39 @@
     });
   };
 
-  const [todaysPic, ...prevPics] = await fetchData();
+  const data = await fetchData();
 
-  render(document.getElementById("today"), todaysPic);
+  const renderLarge = () => {
+    const [todaysPic, ...prevPics] = data;
+    renderPhoto(document.getElementById("today"), todaysPic);
 
-  const prevPicEl = document.querySelector(".prev-day");
-  const more = document.querySelector(".more");
+    const prevPicEl = document.querySelector(".prev-day");
+    const more = document.querySelector(".more");
 
-  prevPics.forEach((data, index) => {
-    if (!index) {
-      render(prevPicEl, data, { imageKey: "thumbnail_image" });
-      return;
-    }
-    const el = prevPicEl.cloneNode(true);
-    render(el, data, { imageKey: "thumbnail_image" });
-    prevPicEl.parentNode.insertBefore(el, more);
-  });
+    prevPics.forEach((data, index) => {
+      if (!index) {
+        renderPhoto(prevPicEl, data, { imageKey: "thumbnail_image" });
+        return;
+      }
+      const el = prevPicEl.cloneNode(true);
+      renderPhoto(el, data, { imageKey: "thumbnail_image" });
+      prevPicEl.parentNode.insertBefore(el, more);
+    });
+  };
 
+  const renderCompact = () => {
+    console.log("render compact");
+  };
+
+  const render = {
+    compact: renderCompact,
+    large: renderLarge,
+  };
+
+  document
+    .querySelector(`[data-theme="${options.theme}"]`)
+    .classList.remove("is-hidden");
+
+  render[options.theme]();
   // TODO hide loader, show content
 })();
