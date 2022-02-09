@@ -1,7 +1,6 @@
 (async () => {
   const days = 4;
-
-  const options = await chrome.storage.sync.get();
+  const { theme = "compact" } = await chrome.storage.sync.get();
 
   const formatDate = (date) => {
     const options = {
@@ -88,11 +87,11 @@
 
     prevPics.forEach((data, index) => {
       if (!index) {
-        renderPhoto(prevPicEl, data, { imageKey: "thumbnail_image" });
+        renderPhoto(prevPicEl, data, { imageKey: "small_image" });
         return;
       }
       const el = prevPicEl.cloneNode(true);
-      renderPhoto(el, data, { imageKey: "thumbnail_image" });
+      renderPhoto(el, data, { imageKey: "small_image" });
       parent.insertBefore(el, more);
     });
   };
@@ -104,11 +103,11 @@
 
     data.forEach((pic, index) => {
       if (!index) {
-        renderPhoto(first, pic, { imageKey: "thumbnail_image" });
+        renderPhoto(first, pic, { imageKey: "small_image" });
         return;
       }
       const next = first.cloneNode(true);
-      renderPhoto(next, pic, { imageKey: "thumbnail_image" });
+      renderPhoto(next, pic, { imageKey: "small_image" });
       parent.insertBefore(next, more);
     });
   };
@@ -119,9 +118,9 @@
   };
 
   document
-    .querySelector(`[data-theme="${options.theme}"]`)
+    .querySelector(`[data-theme="${theme}"]`)
     .classList.remove("is-hidden");
 
-  render[options.theme]();
+  render[theme]();
   // TODO hide loader, show content
 })();
