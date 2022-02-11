@@ -46,12 +46,13 @@
     photograherName.textContent = photographer.name;
     photograherName.href = `https://www.vogue.com/photovogue/photographers/${photographer.id}`;
 
+    const themesEl = parentEl.querySelector(".themes");
     const biography = parentEl.querySelector(".photographerBiography");
     biography.textContent = photographer.biography;
 
     if (photographer.websites.length) {
       const websiteList = document.createElement("ul");
-      biography.appendChild(websiteList);
+      biography.parentNode.insertBefore(websiteList, themesEl);
       photographer.websites.forEach((website) => {
         const link = document.createElement("a");
         link.href = website;
@@ -69,7 +70,7 @@
     themes.forEach((theme) => {
       const el = document.createElement("strong");
       el.textContent = `#${theme.text.toLowerCase()} `;
-      parentEl.querySelector(".themes").appendChild(el);
+      themesEl.appendChild(el);
     });
   };
 
